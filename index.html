@@ -11,7 +11,7 @@
 <header class="site-header" style="min-height:105px;display:flex;align-items:center;padding:10px 0;">
   <div class="container topbar-inner" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
     <a href="#home" class="brand" style="display:flex;align-items:center;gap:12px;white-space:nowrap;"><img src="assets/logo.png" alt="BRAND JEJE" style="width:82px;height:82px;object-fit:contain;border-radius:50%;flex-shrink:0;"><span>BRAND JEJE SPORTS CLUB</span></a>
-    <button class="nav-toggle" id="navToggle" onclick="document.getElementById('mainNav').classList.toggle('open');return false;">☰</button>
+    <button class="nav-toggle" id="navToggle">☰</button>
     <nav class="nav" id="mainNav">
       <a href="#club">Club</a>
       <a href="#news">News</a>
@@ -56,16 +56,13 @@
     <div>
       <h2>Club Vision & Mission</h2>
       <h3>Vision</h3><p>To become East Africa's leading sports club nurturing talent and inspiring communities.</p>
-
-      
       <h3>Mission</h3><p>To develop professional athletes, promote sports culture, and deliver winning football through discipline, teamwork and innovation.</p>
     </div>
-
-    
     <div class="card">
       <h4>Core Values</h4>
       <ul><li>Discipline & Integrity</li><li>Teamwork & Respect</li><li>Excellence & Development</li><li>Community Impact</li></ul>
     </div>
+  </div>
   </div>
 </section>
 
@@ -228,10 +225,5 @@
   }
 }
 </style>
-<script>
-document.getElementById('navToggle').addEventListener('click', function(){
-  document.getElementById('mainNav').classList.toggle('open');
-});
-</script>
 </body>
 </html>
