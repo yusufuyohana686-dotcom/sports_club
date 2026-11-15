@@ -119,15 +119,80 @@
 <!-- SHOP -->
 <section id="shop" class="section alt">
   <div class="container">
-    <h2>Shop & Tickets</h2>
+    <div class="section-head"><h2>Shop & <span>Tickets</span></h2></div>
     <div class="grid-3">
-      <div class="price-card"><h4>Home Jersey</h4><p class="price">60,000 UGX</p><button>Buy Now</button></div>
-      <div class="price-card featured"><h4>Club Membership</h4><p class="price">75,000 UGX / Year</p><button>Join Now</button></div>
-      <div class="price-card"><h4>Match Ticket</h4><p class="price">20,000 UGX</p><button>Get Ticket</button></div>
+      <div class="price-card"><h4>Home Jersey</h4><p class="price">60,000 UGX</p><button onclick="openOrder('jersey')">Buy Now</button></div>
+      <div class="price-card featured"><h4>Club Membership</h4><p class="price">75,000 UGX / Year</p><button onclick="openOrder('membership')">Join Now</button></div>
+      <div class="price-card"><h4>Match Ticket</h4><p class="price">20,000 UGX</p><button onclick="openOrder('ticket')">Get Ticket</button></div>
     </div>
   </div>
 </section>
 
+<!-- POPUP FORM -->
+<div id="orderModal" class="modal" style="display:none">
+  <div class="modal-box">
+    <span class="close" onclick="closeOrder()">&times;</span>
+    <h3 id="modalTitle">Order</h3>
+
+    <!-- JERSEY FORM -->
+    <div id="form-jersey" class="order-form">
+      <label>Jersey Type</label>
+      <select id="j-type"><option>Home Jersey - 60,000 UGX</option><option>Away Jersey - 60,000 UGX</option></select>
+      <label>Size</label>
+      <select id="j-size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+      <label>Idadi</label>
+      <input type="number" id="j-qty" value="1" min="1">
+      <label>Jina la kuandika nyuma ya Jezi (Si lazima)</label>
+      <input type="text" id="j-name" placeholder="Mfano: JEJE 10">
+      <label>Jina Kamili *</label><input type="text" id="j-fullname" placeholder="Jina lako">
+      <label>Namba ya Simu *</label><input type="tel" id="j-phone" placeholder="07XX XXX XXX">
+      <label>Email (Si lazima)</label><input type="email" id="j-email" placeholder="email@gmail.com">
+      <label>Njia ya Malipo</label>
+      <select id="j-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+      <button class="submit-btn" onclick="submitJersey()">Confirm & Get Code</button>
+      <p id="j-code" class="code-box" style="display:none"></p>
+    </div>
+
+    <!-- MEMBERSHIP FORM -->
+    <div id="form-membership" class="order-form" style="display:none">
+      <label>Chagua Membership</label>
+      <select id="m-type" onchange="updateMemberPrice()"><option value="Gold Membership - 75,000">Gold Membership - 75,000 UGX</option><option value="Silver Membership - 50,000">Silver Membership - 50,000 UGX</option></select>
+      <label>Aina ya Usajili</label>
+      <select id="m-kind" onchange="checkRenew()"><option value="Mpya">Mpya - Najiunga kwa mara ya kwanza</option><option value="Renew">Renew - Narenew Membership</option></select>
+      <div id="renew-note" style="display:none;background:#fff3cd;color:#000;padding:10px;border-radius:8px;font-size:.85rem;margin:8px 0">
+        ⚠️ Renew inaruhusiwa tu kama umeshakamilisha mwaka 1 ukiwa member. Tafadhali thibitisha:
+        <label style="display:block;margin-top:6px"><input type="checkbox" id="m-confirm-year"> Ndio, nimemaliza mwaka 1 kama member</label>
+      </div>
+      <label>Jina Kamili *</label><input type="text" id="m-fullname" placeholder="Jina lako">
+      <label>Namba ya Simu *</label><input type="tel" id="m-phone" placeholder="07XX XXX XXX">
+      <label>Email (Si lazima)</label><input type="email" id="m-email">
+      <label>Njia ya Malipo</label>
+      <select id="m-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+      <p id="m-price" style="font-weight:800;color:#FFC107">Kiasi cha Kulipa: 75,000 UGX</p>
+      <button class="submit-btn" onclick="submitMembership()">Confirm & Join</button>
+      <p id="m-code" class="code-box" style="display:none"></p>
+    </div>
+
+    <!-- TICKET FORM -->
+    <div id="form-ticket" class="order-form" style="display:none">
+      <label>Jina Kamili *</label><input type="text" id="t-fullname" placeholder="Jina lako">
+      <label>Namba ya Simu *</label><input type="tel" id="t-phone" placeholder="07XX XXX XXX">
+      <label>Chagua Upande (Stand)</label>
+      <select id="t-stand"><option>North</option><option>East</option><option>West</option><option>South</option></select>
+      <label>Chagua Sehemu</label>
+      <select id="t-level"><option>Upper</option><option>Lower</option><option>Middle</option></select>
+      <label>Aina ya Siti</label>
+      <select id="t-cat" onchange="updateTicketPrice()"><option value="Regular - 20,000">Regular - 20,000 UGX</option><option value="VIP - 35,000">VIP - 35,000 UGX</option><option value="VVIP - 50,000">VVIP - 50,000 UGX</option><option value="VVVIP - 70,000">VVVIP - 70,000 UGX</option></select>
+      <label>Idadi ya Tiketi</label><input type="number" id="t-qty" value="1" min="1" max="10">
+      <label>Njia ya Malipo</label>
+      <select id="t-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+      <p id="t-price" style="font-weight:800;color:#FFC107">Jumla: 20,000 UGX</p>
+      <button class="submit-btn" onclick="submitTicket()">Confirm & Get Ticket</button>
+      <p id="t-code" class="code-box" style="display:none"></p>
+    </div>
+
+  </div>
+</div>
 <section id="contact" class="section footer">
   <div class="container grid-2">
     <div><h3>SPORTS CLUB</h3><p>Kampala, Uganda<br>info@sportsclub.ug<br>+256 747323750 +2557 46257644</p></div>
