@@ -178,56 +178,56 @@ th,td{padding:12px;text-align:left;border-bottom:1px solid #262626;color:#fff}
     <span class="close" onclick="closeOrder()">&times;</span>
     <h3 id="modalTitle">Order</h3>
     <div id="form-jersey" class="order-form">
-      <label>Jersey Type</label>
-      <select id="j-type"><option>Home Jersey - 60,000 UGX</option><option>Away Jersey - 60,000 UGX</option></select>
-      <label>Size</label>
-      <select id="j-size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
-      <label>Idadi</label>
-      <input type="number" id="j-qty" value="1" min="1">
-      <label>Jina la kuandika nyuma ya Jezi (Si lazima)</label>
-      <input type="text" id="j-name" placeholder="Mfano: JEJE 10">
-      <label>Jina Kamili *</label><input type="text" id="j-fullname" placeholder="Jina lako">
-      <label>Namba ya Simu *</label><input type="tel" id="j-phone" placeholder="07XX XXX XXX">
-      <label>Email (Si lazima)</label><input type="email" id="j-email" placeholder="email@gmail.com">
-      <label>Njia ya Malipo</label>
-      <select id="j-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
-      <button class="submit-btn" onclick="submitJersey()">Confirm & Get Code</button>
-      <p id="j-code" class="code-box" style="display:none"></p>
-    </div>
+  <label>Jersey Type</label>
+  <select id="j-type"><option>Home Jersey - 60,000 UGX</option><option>Away Jersey - 60,000 UGX</option></select>
+  <label>Size</label>
+  <select id="j-size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+  <label>Quantity</label>
+  <input type="number" id="j-qty" value="1" min="1">
+  <label>Name to print on back of Jersey (Optional)</label>
+  <input type="text" id="j-name" placeholder="Example: JEJE 10">
+  <label>Full Name *</label><input type="text" id="j-fullname" placeholder="Your name">
+  <label>Phone Number *</label><input type="tel" id="j-phone" placeholder="07XX XXX XXX">
+  <label>Email (Optional)</label><input type="email" id="j-email" placeholder="email@gmail.com">
+  <label>Payment Method</label>
+  <select id="j-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+  <button class="submit-btn" onclick="submitJersey()">Confirm & Get Code</button>
+  <p id="j-code" class="code-box" style="display:none"></p>
+</div>
     <div id="form-membership" class="order-form" style="display:none">
-      <label>Chagua Membership</label>
-      <select id="m-type" onchange="updateMemberPrice()"><option value="Gold Membership - 75,000">Gold Membership - 75,000 UGX</option><option value="Silver Membership - 50,000">Silver Membership - 50,000 UGX</option></select>
-      <label>Aina ya Usajili</label>
-      <select id="m-kind" onchange="checkRenew()"><option value="Mpya">Mpya - Najiunga kwa mara ya kwanza</option><option value="Renew">Renew - Narenew Membership</option></select>
-      <div id="renew-note" style="display:none;background:#fff3cd;color:#000;padding:10px;border-radius:8px;font-size:.85rem;margin:8px 0">
-        ⚠️ Renew inaruhusiwa tu kama umeshakamilisha mwaka 1 ukiwa member. Tafadhali thibitisha:
-        <label style="display:block;margin-top:6px"><input type="checkbox" id="m-confirm-year"> Ndio, nimemaliza mwaka 1 kama member</label>
-      </div>
-      <label>Jina Kamili *</label><input type="text" id="m-fullname" placeholder="Jina lako">
-      <label>Namba ya Simu *</label><input type="tel" id="m-phone" placeholder="07XX XXX XXX">
-      <label>Email (Si lazima)</label><input type="email" id="m-email">
-      <label>Njia ya Malipo</label>
-      <select id="m-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
-      <p id="m-price" style="font-weight:800;color:#FFC107">Kiasi cha Kulipa: 75,000 UGX</p>
-      <button class="submit-btn" onclick="submitMembership()">Confirm & Join</button>
-      <p id="m-code" class="code-box" style="display:none"></p>
-    </div>
+  <label>Choose Membership</label>
+  <select id="m-type" onchange="updateMemberPrice()"><option value="Gold Membership - 75,000">Gold Membership - 75,000 UGX</option><option value="Silver Membership - 50,000">Silver Membership - 50,000 UGX</option></select>
+  <label>Registration Type</label>
+  <select id="m-kind" onchange="checkRenew()"><option value="New">New - Joining for the first time</option><option value="Renew">Renew - Renewing Membership</option></select>
+  <div id="renew-note" style="display:none;background:#fff3cd;color:#000;padding:10px;border-radius:8px;font-size:.85rem;margin:8px 0">
+    ⚠️ Renew is only allowed if you have completed 1 year as a member. Please confirm:
+    <label style="display:block;margin-top:6px"><input type="checkbox" id="m-confirm-year"> Yes, I have completed 1 year as a member</label>
+  </div>
+  <label>Full Name *</label><input type="text" id="m-fullname" placeholder="Your name">
+  <label>Phone Number *</label><input type="tel" id="m-phone" placeholder="07XX XXX XXX">
+  <label>Email (Optional)</label><input type="email" id="m-email">
+  <label>Payment Method</label>
+  <select id="m-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+  <p id="m-price" style="font-weight:800;color:#FFC107">Amount to Pay: 75,000 UGX</p>
+  <button class="submit-btn" onclick="submitMembership()">Confirm & Join</button>
+  <p id="m-code" class="code-box" style="display:none"></p>
+</div>
     <div id="form-ticket" class="order-form" style="display:none">
-      <label>Jina Kamili *</label><input type="text" id="t-fullname" placeholder="Jina lako">
-      <label>Namba ya Simu *</label><input type="tel" id="t-phone" placeholder="07XX XXX XXX">
-      <label>Chagua Upande (Stand)</label>
-      <select id="t-stand"><option>North</option><option>East</option><option>West</option><option>South</option></select>
-      <label>Chagua Sehemu</label>
-      <select id="t-level"><option>Upper</option><option>Lower</option><option>Middle</option></select>
-      <label>Aina ya Siti</label>
-      <select id="t-cat" onchange="updateTicketPrice()"><option value="Regular - 20,000">Regular - 20,000 UGX</option><option value="VIP - 35,000">VIP - 35,000 UGX</option><option value="VVIP - 50,000">VVIP - 50,000 UGX</option><option value="VVVIP - 70,000">VVVIP - 70,000 UGX</option></select>
-      <label>Idadi ya Tiketi</label><input type="number" id="t-qty" value="1" min="1" max="10">
-      <label>Njia ya Malipo</label>
-      <select id="t-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
-      <p id="t-price" style="font-weight:800;color:#FFC107">Jumla: 20,000 UGX</p>
-      <button class="submit-btn" onclick="submitTicket()">Confirm & Get Ticket</button>
-      <p id="t-code" class="code-box" style="display:none"></p>
-    </div>
+  <label>Full Name *</label><input type="text" id="t-fullname" placeholder="Your name">
+  <label>Phone Number *</label><input type="tel" id="t-phone" placeholder="07XX XXX XXX">
+  <label>Choose Stand</label>
+  <select id="t-stand"><option>North</option><option>East</option><option>West</option><option>South</option></select>
+  <label>Choose Section</label>
+  <select id="t-level"><option>Upper</option><option>Lower</option><option>Middle</option></select>
+  <label>Seat Type</label>
+  <select id="t-cat" onchange="updateTicketPrice()"><option value="Regular - 20,000">Regular - 20,000 UGX</option><option value="VIP - 35,000">VIP - 35,000 UGX</option><option value="VVIP - 50,000">VVIP - 50,000 UGX</option><option value="VVVIP - 70,000">VVVIP - 70,000 UGX</option></select>
+  <label>Number of Tickets</label><input type="number" id="t-qty" value="1" min="1" max="10">
+  <label>Payment Method</label>
+  <select id="t-pay"><option>MTN MoMo</option><option>Airtel Money</option><option>Cash</option></select>
+  <p id="t-price" style="font-weight:800;color:#FFC107">Total: 20,000 UGX</p>
+  <button class="submit-btn" onclick="submitTicket()">Confirm & Get Ticket</button>
+  <p id="t-code" class="code-box" style="display:none"></p>
+</div>
   </div>
 </div>
 
@@ -285,7 +285,7 @@ document.getElementById('orderModal').addEventListener('click', function(e) {
 });
 function updateMemberPrice() {
   let v = document.getElementById('m-type').value;
-  document.getElementById('m-price').innerText = 'Kiasi cha Kulipa: ' + (v.includes('Gold') ? '75,000 UGX' : '50,000 UGX');
+  document.getElementById('m-price').innerText = 'Amount to Pay: ' + (v.includes('Gold') ? '75,000 UGX' : '50,000 UGX');
 }
 function checkRenew() {
   document.getElementById('renew-note').style.display = document.getElementById('m-kind').value === 'Renew' ? 'block' : 'none';
@@ -294,34 +294,34 @@ function updateTicketPrice() {
   let prices = { 'Regular': 20000, 'VIP': 35000, 'VVIP': 50000, 'VVVIP': 70000 };
   let cat = document.getElementById('t-cat').value.split(' - ')[0];
   let qty = parseInt(document.getElementById('t-qty').value) || 1;
-  document.getElementById('t-price').innerText = 'Jumla: ' + (prices[cat] * qty).toLocaleString() + ' UGX';
+  document.getElementById('t-price').innerText = 'Total: ' + (prices[cat] * qty).toLocaleString() + ' UGX';
 }
 document.getElementById('t-qty')?.addEventListener('input', updateTicketPrice);
 function submitJersey() {
   let name = document.getElementById('j-fullname').value.trim(), phone = document.getElementById('j-phone').value.trim();
-  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
+  if (!name || !phone) { alertalert('Please fill in your Full Name and Phone Number'); return; }
   let code = makeCode('JEJE-JERSEY');
   document.getElementById('j-code').style.display = 'block';
-  document.getElementById('j-code').innerText = '✅ Asante ' + name + '! Code yako ya manunuzi: ' + code + ' - Weka screenshot hii!';
+  document.getElementById('j-code').innerText = '✅ Thank you '+name+'! Your order code: ' + code + ' - Weka screenshot hii!';
   let msg = `*NEW JERSEY ORDER*%0A%0ACode: ${code}%0AJersey: ${document.getElementById('j-type').value}%0ASize: ${document.getElementById('j-size').value}%0AIdadi: ${document.getElementById('j-qty').value}%0AJina nyuma: ${document.getElementById('j-name').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AEmail: ${document.getElementById('j-email').value}%0AMalipo: ${document.getElementById('j-pay').value}`;
   setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
 }
 function submitMembership() {
   let name = document.getElementById('m-fullname').value.trim(), phone = document.getElementById('m-phone').value.trim();
-  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
-  if (document.getElementById('m-kind').value === 'Renew' && !document.getElementById('m-confirm-year').checked) { alert('Kwa Renew, lazima uthibitishe umemaliza mwaka 1 kama member'); return; }
+  if (!name || !phone) { alert('Please fill in your Full Name and Phone Number'); return; }
+  if (document.getElementById('m-kind').value === 'Renew' && !document.getElementById('m-confirm-year').checked) { alertalert('For Renew, you must confirm you have completed 1 year as a member'); return; }
   let code = makeCode('JEJE-MEMBER');
   document.getElementById('m-code').style.display = 'block';
-  document.getElementById('m-code').innerText = '✅ Karibu! Membership Code yako: ' + code + ' - Weka screenshot hii!';
+  document.getElementById('m-code').innerText = '✅ Welcome! Your Membership Code: '+ code + ' - Weka screenshot hii!';
   let msg = `*NEW MEMBERSHIP*%0A%0ACode: ${code}%0AKifurushi: ${document.getElementById('m-type').value}%0AAina: ${document.getElementById('m-kind').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AEmail: ${document.getElementById('m-email').value}%0AMalipo: ${document.getElementById('m-pay').value}`;
   setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
 }
 function submitTicket() {
   let name = document.getElementById('t-fullname').value.trim(), phone = document.getElementById('t-phone').value.trim();
-  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
+  if (!name || !phone) { alert('Please fill in your Full Name and Phone Number'); return; }
   let code = makeCode('JEJE-TICKET');
   document.getElementById('t-code').style.display = 'block';
-  document.getElementById('t-code').innerText = '✅ Tiketi yako imehifadhiwa! Code: ' + code + ' - Weka screenshot hii kuingia uwanjani!';
+  document.getElementById('t-code').innerText = '✅ Your ticket is reserved! Code: ' + code + ' - Weka screenshot hii kuingia uwanjani!';
   let msg = `*NEW TICKET*%0A%0ACode: ${code}%0AStand: ${document.getElementById('t-stand').value} - ${document.getElementById('t-level').value}%0AAina: ${document.getElementById('t-cat').value}%0AIdadi: ${document.getElementById('t-qty').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AMalipo: ${document.getElementById('t-pay').value}`;
   setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
 }
