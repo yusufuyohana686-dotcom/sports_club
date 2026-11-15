@@ -137,5 +137,36 @@
 </section>
 
 <script src="script.js"></script>
+  <style>
+@media (max-width: 768px){
+  .site-header{overflow:visible !important;}
+  .nav{display:none !important;}
+  .nav.open{
+    display:flex !important;
+    flex-direction:column !important;
+    position:fixed !important;
+    top:105px !important;
+    left:0 !important;
+    right:0 !important;
+    width:100% !important;
+    background:#0a0a1a !important;
+    padding:20px !important;
+    gap:18px !important;
+    z-index:9999 !important;
+  }
+  .nav.open a{
+    display:block !important;
+    font-size:18px !important;
+    color:white !important;
+    padding:8px 0 !important;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+}
+</style>
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  document.getElementById('mainNav').classList.toggle('open');
+});
+</script>
 </body>
 </html>
