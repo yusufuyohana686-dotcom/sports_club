@@ -1,40 +1,89 @@
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,system-ui,sans-serif;background:#000000;color:#fff;scroll-behavior:smooth}
-.container{max-width:1100px;margin:auto;padding:0 20px}
-.topbar{position:fixed;top:0;width:100%;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid #262626}
-.topbar-inner{display:flex;justify-content:space-between;align-items:center;height:64px}
-.brand{font-weight:800;text-decoration:none;color:#fff}.brandmark{background:#D61E2B;color:#fff;padding:4px 8px;border-radius:6px;margin-right:6px}
-.nav{display:flex;gap:18px}.nav a{color:#e5e5e5;text-decoration:none;font-size:.9rem}.nav a:hover{color:#FFC107}
-.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
-.hero{height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0}.hero-bg img{position:absolute;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.5s}.hero-bg img.active{opacity:1}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 30%,rgba(0,0,0,.4))}
-.hero-content{position:relative;z-index:2;max-width:650px}
-.badge{background:#1a1a1a;border:1px solid #FFC107;padding:6px 12px;border-radius:999px;font-size:.7rem;letter-spacing:.1em;color:#FFC107}
-.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:.95;margin:18px 0}
-.hero h1 span,.section-head h2 span,h1 .gold,h2 .gold,.gold{color:#FFC107}
-.cta-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-.btn{padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:#D61E2B;color:#fff}.btn-ghost{border:1px solid #fff;color:#fff}
-.upl-mini,.upl-badge{background:#FFC107;color:#000;font-weight:900;padding:2px 8px;border-radius:6px;font-size:.75rem}
-.section{padding:90px 0;border-top:1px solid #262626}.section.alt{background:#0d0d0d}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card,.news-card,.price-card,.team-card,.fixture{background:#111111;border:1px solid #262626;padding:20px;border-radius:16px}
-.fixture{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.status{padding:6px 10px;border-radius:999px;font-size:.7rem}.win{background:#FFC107;color:#000}.draw{background:#D61E2B;color:#fff}.upcoming{background:#333333;color:#fff}
-.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:12px;text-align:left;border-bottom:1px solid #262626}.highlight{background:rgba(255,193,7,.10)}
-.team-card img{width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:12px;background:#1a1a1a}
-.price{font-size:1.8rem;font-weight:800;margin:10px 0}.featured{border-color:#FFC107;transform:scale(1.03)}
-.price-card button{width:100%;padding:10px;border-radius:10px;border:none;background:#D61E2B;color:#fff;font-weight:700;cursor:pointer}
-.footer{padding:40px 0 20px}.copy{text-align:center;margin-top:30px;opacity:.5;font-size:.8rem}
-@media(max-width:820px){.grid-2,.grid-3{grid-template-columns:1fr}.nav{display:none;position:absolute;top:105px;left:0;width:100%;background:#000000;flex-direction:column;padding:20px;z-index:9999}.nav.open{display:flex}.nav-toggle{display:block}}
+// Mobile nav
+const toggle = document.getElementById('navToggle');
+const nav = document.getElementById('mainNav');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:15px}
-.modal-box{background:#111;width:100%;max-width:480px;max-height:90vh;overflow:auto;padding:22px;border-radius:16px;border:1px solid #FFC107;position:relative}
-.modal-box h3{color:#FFC107;margin-bottom:14px}
-.close{position:absolute;right:16px;top:10px;font-size:28px;cursor:pointer;color:#fff}
-.order-form label{display:block;margin:10px 0 4px;font-size:.85rem;color:#ccc}
-.order-form input,.order-form select{width:100%;padding:11px;border-radius:10px;border:1px solid #333;background:#000;color:#fff}
-.submit-btn{width:100%;padding:13px;margin-top:16px;border:none;border-radius:10px;background:#D61E2B;color:#fff;font-weight:800;cursor:pointer;font-size:1rem}
-.code-box{background:#FFC107;color:#000;padding:12px;border-radius:10px;font-weight:800;text-align:center;margin-top:12px}
+// Hero background slider - your 3 animation images
+const slides = document.querySelectorAll('.hero-bg img');
+let i = 0;
+if (slides.length > 0) {
+  setInterval(() => {
+    slides[i].classList.remove('active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('active');
+  }, 4000);
+}
+
+// Smooth reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.style.transform = 'translateY(0)', e.target.style.opacity = '1'
+  })
+}, { threshold: .15 });
+document.querySelectorAll('.section').forEach(s => {
+  s.style.transform = 'translateY(20px)'; s.style.opacity = '.9'; s.style.transition = '.6s';
+  observer.observe(s);
+});
+
+// SHOP - Buy Now / Join Now / Get Ticket
+const WA_NUMBER = "256747323750";
+function makeCode(prefix) { return prefix + "-" + Math.floor(1000 + Math.random() * 9000); }
+function openOrder(type) {
+  document.getElementById('orderModal').style.display = 'flex';
+  document.querySelectorAll('.order-form').forEach(f => f.style.display = 'none');
+  document.getElementById('form-' + type).style.display = 'block';
+  document.getElementById('modalTitle').innerText = type === 'jersey' ? 'Buy Jersey' : type === 'membership' ? 'Join Membership' : 'Get Match Ticket';
+}
+function closeOrder() { document.getElementById('orderModal').style.display = 'none'; }
+
+// Funga Popup ukibonyeza nje yake
+document.getElementById('orderModal').addEventListener('click', function(e) {
+  if (e.target === this) closeOrder();
+});
+
+function updateMemberPrice() {
+  let v = document.getElementById('m-type').value;
+  document.getElementById('m-price').innerText = 'Kiasi cha Kulipa: ' + (v.includes('Gold') ? '75,000 UGX' : '50,000 UGX');
+}
+function checkRenew() {
+  document.getElementById('renew-note').style.display = document.getElementById('m-kind').value === 'Renew' ? 'block' : 'none';
+}
+function updateTicketPrice() {
+  let prices = { 'Regular': 20000, 'VIP': 35000, 'VVIP': 50000, 'VVVIP': 70000 };
+  let cat = document.getElementById('t-cat').value.split(' - ')[0];
+  let qty = parseInt(document.getElementById('t-qty').value) || 1;
+  document.getElementById('t-price').innerText = 'Jumla: ' + (prices[cat] * qty).toLocaleString() + ' UGX';
+}
+document.getElementById('t-qty')?.addEventListener('input', updateTicketPrice);
+
+function submitJersey() {
+  let name = document.getElementById('j-fullname').value.trim(), phone = document.getElementById('j-phone').value.trim();
+  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
+  let code = makeCode('JEJE-JERSEY');
+  document.getElementById('j-code').style.display = 'block';
+  document.getElementById('j-code').innerText = '✅ Asante ' + name + '! Code yako ya manunuzi: ' + code + ' - Weka screenshot hii!';
+  let msg = `*NEW JERSEY ORDER*%0A%0ACode: ${code}%0AJersey: ${document.getElementById('j-type').value}%0ASize: ${document.getElementById('j-size').value}%0AIdadi: ${document.getElementById('j-qty').value}%0AJina nyuma: ${document.getElementById('j-name').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AEmail: ${document.getElementById('j-email').value}%0AMalipo: ${document.getElementById('j-pay').value}`;
+  setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
+}
+function submitMembership() {
+  let name = document.getElementById('m-fullname').value.trim(), phone = document.getElementById('m-phone').value.trim();
+  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
+  if (document.getElementById('m-kind').value === 'Renew' && !document.getElementById('m-confirm-year').checked) { alert('Kwa Renew, lazima uthibitishe umemaliza mwaka 1 kama member'); return; }
+  let code = makeCode('JEJE-MEMBER');
+  document.getElementById('m-code').style.display = 'block';
+  document.getElementById('m-code').innerText = '✅ Karibu! Membership Code yako: ' + code + ' - Weka screenshot hii!';
+  let msg = `*NEW MEMBERSHIP*%0A%0ACode: ${code}%0AKifurushi: ${document.getElementById('m-type').value}%0AAina: ${document.getElementById('m-kind').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AEmail: ${document.getElementById('m-email').value}%0AMalipo: ${document.getElementById('m-pay').value}`;
+  setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
+}
+function submitTicket() {
+  let name = document.getElementById('t-fullname').value.trim(), phone = document.getElementById('t-phone').value.trim();
+  if (!name || !phone) { alert('Tafadhali jaza Jina na Namba ya Simu'); return; }
+  let code = makeCode('JEJE-TICKET');
+  document.getElementById('t-code').style.display = 'block';
+  document.getElementById('t-code').innerText = '✅ Tiketi yako imehifadhiwa! Code: ' + code + ' - Weka screenshot hii kuingia uwanjani!';
+  let msg = `*NEW TICKET*%0A%0ACode: ${code}%0AStand: ${document.getElementById('t-stand').value} - ${document.getElementById('t-level').value}%0AAina: ${document.getElementById('t-cat').value}%0AIdadi: ${document.getElementById('t-qty').value}%0A%0AJina: ${name}%0ASimu: ${phone}%0AMalipo: ${document.getElementById('t-pay').value}`;
+  setTimeout(() => { window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'); }, 800);
+}
